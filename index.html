@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sliff Company</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Sliff Company. De aquí a lo grande, pero juntos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap">
+<style>
+/* Sliff v3. Streetwear de garaje: el rayo de la capucha es el sistema gráfico (cursor, barra de envío, separadores, sello),
+   las tachuelas son las costuras. Titulares en Bricolage Grotesque (el nombre se transforma), textos en Schibsted Grotesk y la firma bordada en script. Azul eléctrico sobre negro y blanco roto. */
+:root{
+  --blue:#3C5CA0; --volt:#4F73C9; --blue-soft:#DCE3F1;
+  --black:#0F1013; --ink:#16171B; --off:#EEEFEC; --paper:#F7F7F4; --grey:#8A8E96;
+  --muted:#5A5E66; --line:#D5D7DA; --stud:#C9CCD1;
+  --f:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --f-script:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --gut:max(16px,env(safe-area-inset-left,0px));
+  --gut-r:max(16px,env(safe-area-inset-right,0px));
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--off);color:var(--black);font-family:var(--f);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,.mark,.logo{font-feature-settings:"liga" 0;font-variant-ligatures:none}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--volt);outline-offset:3px}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{text-wrap:balance}
+.wrap{max-width:1280px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gut-r)}
+.lbl{font-family:var(--f);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.big{font-family:var(--f-display);font-weight:700;letter-spacing:-.025em;line-height:.95;font-variation-settings:"wdth" 92,"opsz" 96}
+.script{font-family:var(--f-script);font-weight:700;text-transform:none;letter-spacing:-.03em;font-variation-settings:"wdth" 88,"opsz" 96}
+.sr{position:absolute;left:-9999px}
+
+/* Grano de película por encima de todo */
+.grain{position:fixed;inset:0;z-index:70;pointer-events:none;opacity:.08;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* Tachuelas: fila de puntos plateados como los de la capucha y el bolsillo */
+.studs{height:8px;background:radial-gradient(circle at 4px 4px,#F4F5F7 0 1.6px,var(--stud) 2.2px,#8F939A 3px,transparent 3.4px) 0 0/16px 8px repeat-x}
+
+/* PENDIENTE */
+.todo{position:relative;background-color:var(--blue-soft);background-image:repeating-linear-gradient(135deg,transparent 0 14px,rgba(60,92,160,.1) 14px 15px);overflow:hidden}
+.todo-tag{position:absolute;left:10px;bottom:10px;z-index:2;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-variation-settings:"wdth" 115;line-height:1.35;background:rgba(247,247,245,.94);color:var(--black);padding:5px 8px;border-radius:2px;max-width:calc(100% - 20px)}
+.todo-tag b{color:var(--blue)}
+.todo-text{background:linear-gradient(transparent 62%,rgba(79,115,201,.25) 62%)}
+body.clean .todo-tag{display:none}
+body.clean .todo-text{background:none}
+
+/* ---------- Nav ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:calc(12px + env(safe-area-inset-top,0px)) var(--gut-r) 12px var(--gut);display:flex;align-items:center;justify-content:space-between;gap:16px;color:#fff;transition:background .3s,color .3s}
+.nav.solid{background:rgba(238,239,236,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--black)}
+.logo{display:flex;align-items:center;gap:6px;text-decoration:none;font-family:var(--f-display);font-weight:800;font-size:1.5rem;letter-spacing:-.02em;text-transform:none;font-variation-settings:"wdth" 88,"opsz" 96;line-height:1}
+.logo svg{width:22px;height:14px;fill:currentColor}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.nav ul a{text-decoration:none}
+.nav ul a:hover{color:var(--volt)}
+.bag{display:flex;gap:8px;align-items:center;border:0;background:#fff;color:var(--black);border-radius:999px;padding:9px 14px 9px 12px}
+.bag svg{width:16px;height:12px;fill:var(--blue)}
+.bag span{font-variant-numeric:tabular-nums}
+@media (max-width:760px){.nav ul{display:none}}
+
+/* ---------- Hero ---------- */
+.hero{position:sticky;top:0;height:100svh;min-height:600px;z-index:0;color:#fff;overflow:hidden;background:var(--black)}
+.hero-photo{position:absolute;inset:0}
+.hero-photo img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:72% 40%;filter:saturate(.85) contrast(1.05)}
+.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(15,16,19,.85),rgba(15,16,19,.05) 55%,rgba(15,16,19,.4))}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:3}
+.hero-in{position:absolute;left:0;right:0;bottom:0;z-index:2;padding-bottom:calc(26px + env(safe-area-inset-bottom,0px))}
+.mark{position:relative;display:inline-block;font-size:clamp(120px,30vw,420px);margin:0 0 0 -.04em;white-space:nowrap;line-height:.82;letter-spacing:-.01em;font-family:var(--f-display);font-weight:700;font-variation-settings:"wdth" 96,"opsz" 96}
+.hero-row{display:grid;grid-template-columns:1fr auto;align-items:end;gap:20px 32px;margin-top:clamp(18px,2.4vw,30px);border-top:1px solid rgba(255,255,255,.3);padding-top:18px}
+.claim{font-family:var(--f-display);font-size:clamp(1.5rem,3.6vw,2.7rem);font-weight:600;line-height:1;letter-spacing:-.03em;max-width:20ch}
+.claim .script{display:block;font-size:1em;font-weight:inherit;letter-spacing:inherit;font-variation-settings:normal;color:#fff;margin-top:4px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;opacity:.85}
+.hero-meta span{display:flex;gap:6px;align-items:center}
+.hero-meta svg{width:14px;height:9px;fill:var(--volt)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:0;padding:16px 26px;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border:0;position:relative;overflow:hidden;transition:color .25s,background .25s}
+.btn svg{width:18px;height:12px;fill:currentColor;transition:transform .3s}
+.btn:hover svg{transform:translateX(4px) rotate(-8deg)}
+.btn-light{background:#fff;color:var(--black)}
+.btn-light:hover{background:var(--volt);color:#fff}
+.btn-dark{background:var(--black);color:#fff}
+.btn-dark:hover{background:var(--blue)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{background:var(--black)}
+.stamp{position:absolute;right:var(--gut-r);top:calc(84px + env(safe-area-inset-top,0px));z-index:2;width:clamp(96px,11vw,140px);aspect-ratio:1;max-width:100%}
+.stamp svg.ring{width:100%;height:100%;animation:spin 18s linear infinite}
+.stamp svg.ring{overflow:visible}
+.stamp svg.ring text{font-family:var(--f);font-weight:700;font-size:10px;fill:#fff}
+.stamp .core{position:absolute;inset:30%;display:grid;place-items:center;background:var(--blue);border-radius:50%}
+.stamp .core svg{width:62%;fill:#fff}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:640px){.hero-row{grid-template-columns:1fr}.stamp{top:calc(70px + env(safe-area-inset-top,0px))}}
+
+/* ---------- Capa que sube ---------- */
+.over{position:relative;z-index:1;background:var(--off);box-shadow:0 -30px 60px -20px rgba(0,0,0,.6)}
+.over > .studs:first-child{background-color:var(--black);height:14px;background-position:0 3px}
+section{padding-block:clamp(64px,10vw,128px)}
+.sec-head{display:grid;grid-template-columns:1fr minmax(0,380px);align-items:end;gap:18px 48px;margin-bottom:clamp(32px,5vw,56px)}
+.sec-head > *{min-width:0}
+.sec-head h2{font-size:clamp(3rem,10vw,8.4rem)}
+.sec-head h2 em{font-style:normal;color:var(--blue)}
+.sec-head p{color:var(--muted)}
+.eyebrow{display:flex;align-items:center;gap:8px;color:var(--blue);margin-bottom:14px}
+.eyebrow svg{width:16px;height:10px;fill:currentColor}
+@media (max-width:820px){.sec-head{grid-template-columns:1fr}}
+
+/* ---------- Colección ---------- */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(10px,1.6vw,20px)}
+.card{border:0;background:none;padding:0;text-align:left;display:block;width:100%;min-width:0;color:inherit}
+.card-img{position:relative;aspect-ratio:1/1;max-width:100%;background:#fff;overflow:hidden}
+.card-img::before{content:"";position:absolute;inset:0;background:var(--blue);clip-path:polygon(100% 0,100% 0,100% 0,100% 0);transition:clip-path .55s cubic-bezier(.7,0,.2,1);z-index:0}
+.card-img .bolt-bg{position:absolute;width:120%;left:-10%;top:12%;opacity:0;transform:translateX(-12%) rotate(-6deg);transition:opacity .4s .1s,transform .7s cubic-bezier(.2,.7,.2,1);z-index:0}
+.card-img .face{position:absolute;inset:0;display:grid;place-items:center;padding:5%;z-index:1;transition:opacity .45s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.card-img .face img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.card-img .back{opacity:0;transform:scale(1.04)}
+@media (hover:hover){
+  .card:hover .card-img::before{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+  .card:hover .bolt-bg{opacity:1;transform:none}
+  .card:hover .front{opacity:0;transform:scale(.97)}
+  .card:hover .back{opacity:1;transform:none}
+}
+.card.flipped .front{opacity:0}.card.flipped .back{opacity:1;transform:none}
+.badge{position:absolute;top:12px;left:12px;z-index:2;background:var(--black);color:#fff;padding:5px 9px 5px 7px;display:flex;gap:6px;align-items:center}
+.badge svg{width:13px;height:8px;fill:var(--volt)}
+.side-label{position:absolute;top:12px;right:12px;color:var(--black);z-index:2}
+.card-info{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:14px 2px 0;align-items:baseline}
+.card-info h3{font-family:var(--f-display);font-size:clamp(1.3rem,2.6vw,2.2rem);font-weight:700;line-height:1;letter-spacing:-.03em}
+.card-info small{grid-column:1/-1;color:var(--muted);font-size:14px}
+.price{font-size:clamp(1rem,1.8vw,1.35rem);font-weight:700;font-variant-numeric:tabular-nums}
+.flip-hint{display:none;color:var(--muted);font-size:13px;margin-top:16px}
+@media (hover:none){.flip-hint{display:block}}
+@media (max-width:560px){.card-info{grid-template-columns:1fr}.card-info small{grid-column:auto}}
+
+/* ---------- Manifiesto ---------- */
+.marquee{background:var(--black);color:#fff;overflow:hidden;padding:20px 0}
+.track{display:flex;align-items:center;width:max-content;animation:marq 32s linear infinite}
+.track span{font-family:var(--f-display);font-weight:700;font-size:clamp(2rem,6vw,4.4rem);line-height:1.1;letter-spacing:-.035em;white-space:nowrap;padding:0 26px;font-variation-settings:"wdth" 80}
+.track span.s{color:var(--volt)}
+.track svg{width:clamp(40px,5vw,64px);flex:none;fill:var(--volt)}
+.track svg.z path{fill:url(#glass);stroke:#fff;stroke-opacity:.6;stroke-width:.6}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ---------- Storytelling ---------- */
+.story{background:var(--paper);position:relative;overflow:hidden}
+.story-text{font-family:var(--f-display);font-size:clamp(2.2rem,6.4vw,5.4rem);font-weight:600;line-height:1;letter-spacing:-.035em;max-width:17ch;position:relative;z-index:1}
+.story-text .w{opacity:.12;transition:opacity .3s,color .3s}
+.story-text .w.lit{opacity:1}
+.story-text .w.key.lit{color:var(--blue)}
+.story-bolt{position:absolute;right:-6%;top:12%;width:min(48vw,620px);opacity:.9;z-index:0;pointer-events:none}
+.story-foot{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:clamp(48px,7vw,88px);position:relative;z-index:1}
+.story-foot > div{min-width:0}
+.story-foot .studs{margin-bottom:14px}
+.story-foot b{display:block;font-family:var(--f-display);font-size:1.6rem;font-weight:700;letter-spacing:-.03em;line-height:1;margin-bottom:8px}
+.story-foot span{color:var(--muted);font-size:15px}
+@media (max-width:900px){.story-foot{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.story-foot{grid-template-columns:1fr}}
+
+/* ---------- Quiénes somos ---------- */
+.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(32px,6vw,80px);align-items:start}
+.about-grid > *{min-width:0}
+.about-photo{aspect-ratio:4/5;max-width:100%;position:sticky;top:90px}
+.about-text h2{font-size:clamp(2.6rem,6vw,5rem);margin-bottom:24px}
+.about-text p{color:var(--muted);max-width:60ch;margin-top:14px}
+.more summary{cursor:pointer;margin-top:20px;list-style:none;color:var(--blue);display:inline-flex;gap:8px;align-items:center}
+.more summary svg{width:14px;height:9px;fill:currentColor}
+.more summary::-webkit-details-marker{display:none}
+.more[open] summary{display:none}
+.about-text p.sign{font-family:var(--f-display);font-weight:700;letter-spacing:-.03em;font-size:clamp(1.8rem,3.6vw,2.6rem);color:var(--blue);margin-top:30px;line-height:1.05}
+@media (max-width:820px){.about-grid{grid-template-columns:1fr}.about-photo{position:relative;top:0;aspect-ratio:16/10}}
+
+/* ---------- Vida ---------- */
+.vida{background:var(--black);color:#fff}
+.vida .sec-head p{color:#A3A8B1}
+.vida .eyebrow{color:var(--volt)}
+.collage{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:clamp(60px,8vw,110px);gap:clamp(8px,1.4vw,16px)}
+.collage .ph{margin:0;overflow:hidden;background:#1d1f24;position:relative}
+.collage .ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.9);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .6s}
+@media (hover:hover){.collage .ph:hover img{transform:scale(1.05);filter:saturate(1.1)}}
+.c1{grid-column:1/6;grid-row:span 5}
+.c2{grid-column:6/9;grid-row:span 3}
+.c3{grid-column:9/13;grid-row:span 4}
+.c4{grid-column:6/9;grid-row:span 3}
+.c5{grid-column:9/13;grid-row:span 2}
+.c5 img{object-position:50% 70%}
+.tagline{position:absolute;left:10px;bottom:10px;background:#fff;color:var(--black);padding:4px 8px}
+@media (max-width:720px){
+  .collage{grid-template-columns:repeat(6,1fr);grid-auto-rows:70px}
+  .c1{grid-column:1/7;grid-row:span 5}.c2{grid-column:1/4;grid-row:span 3}.c3{grid-column:4/7;grid-row:span 4}.c4{grid-column:1/4;grid-row:span 3}.c5{grid-column:4/7;grid-row:span 2}
+}
+.follow{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.follow a{display:inline-flex;gap:10px;align-items:center;border:1px solid #33363d;padding:12px 18px;text-decoration:none;transition:background .2s,border-color .2s}
+.follow a:hover{background:var(--blue);border-color:var(--blue)}
+.follow a b{font-weight:800}
+
+/* ---------- Próximo drop ---------- */
+.drop{background:var(--blue);color:#fff;position:relative;overflow:hidden}
+.drop::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'%3E%3Cpath transform='translate(50%2030)%20rotate(62)%20scale(2.25%205)%20translate(-12%20-12)' d='M13%202%203%2014h9l-1%208%2010-12h-9l1-8z' fill='%23ffffff' fill-opacity='.06'/%3E%3C/svg%3E") 0 0/220px 132px}
+.drop-grid{position:relative;display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(32px,6vw,80px);align-items:end}
+.drop-grid > div{min-width:0}
+.drop h2{font-size:clamp(3.2rem,11vw,9rem)}
+.drop h2 .script{display:block;font-size:.5em;color:#fff;margin-top:6px}
+.drop p{color:#DCE3F1;margin-top:18px;max-width:42ch}
+.drop-date{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.drop-date span{background:rgba(15,16,19,.25);padding:12px 16px;font-size:13px;color:#DCE3F1}
+.drop-date span b{display:block;font-family:var(--f-display);font-size:2rem;color:#fff;font-weight:700;letter-spacing:-.03em;line-height:1}
+.form{display:flex;background:#fff;padding:5px}
+.form input{flex:1;min-width:0;background:transparent;border:0;padding:12px 14px;color:var(--black);outline:none}
+.form-note{font-size:13px;color:#DCE3F1;margin-top:12px;min-height:1.4em}
+.form-note.ok{color:#fff;font-weight:700}
+@media (max-width:820px){.drop-grid{grid-template-columns:1fr}}
+
+/* ---------- Footer ---------- */
+footer{background:var(--black);color:#A3A8B1;padding:clamp(56px,8vw,96px) 0 calc(28px + env(safe-area-inset-bottom,0px));position:relative;overflow:hidden}
+.foot-sign{font-family:var(--f-display);font-weight:700;letter-spacing:-.04em;font-variation-settings:"wdth" 85,"opsz" 96;color:#fff;font-size:clamp(3.4rem,12vw,10rem);line-height:.9;margin-bottom:clamp(32px,5vw,56px)}
+.foot-sign small{letter-spacing:.28em;font-variation-settings:normal;display:block;font-family:var(--f);font-size:clamp(.9rem,2vw,1.3rem);font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--volt);margin-top:4px}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;padding-top:32px;position:relative}
+.foot > div{min-width:0}
+.foot h4{margin:0 0 12px;color:#fff}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.foot a{text-decoration:none}
+.foot a:hover{color:#fff}
+.contact{font-size:15px;line-height:1.7}
+.contact span{color:#fff;user-select:all}
+.copy{border:1px solid #33363d;background:transparent;color:#A3A8B1;padding:2px 10px;margin-left:6px}
+.copy:hover{color:#fff;border-color:#7D828B}
+.pays{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.pays span{border:1px solid #33363d;padding:5px 9px;color:#D3D6DB}
+.legal{margin-top:44px;padding-top:18px;border-top:1px solid #24262b;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px}
+.made{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff;border:1px solid #33363d;padding:8px 12px 8px 10px;transition:border-color .2s}
+.made:hover{border-color:var(--volt)}
+.made i{font-style:normal;color:#7D828B}
+.made b{font-weight:900;letter-spacing:.3em;font-size:13px}
+@media (max-width:760px){.foot{grid-template-columns:1fr 1fr}.foot > div:first-child{grid-column:1/-1}}
+
+/* Marca de agua MARKA (lateral fijo) */
+.wm{position:fixed;left:calc(12px + env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;z-index:40;text-decoration:none;font-size:10px;font-weight:700;letter-spacing:.38em;text-transform:uppercase;color:#fff;mix-blend-mode:difference;opacity:.6}
+.wm b{font-weight:900}
+@media (max-width:760px){.wm{display:none}}
+
+/* ---------- Diálogos ---------- */
+dialog{border:0;padding:0;color:var(--black)}
+dialog::backdrop{background:rgba(15,16,19,.6);backdrop-filter:blur(4px)}
+.close{display:grid;place-items:center;border:0;background:var(--black);color:#fff;width:42px;height:42px;font-size:16px;line-height:1;flex:none}
+.close:hover{background:var(--blue)}
+@keyframes slide{from{transform:translateX(40px);opacity:0}}
+
+dialog.pdp{margin:0 0 0 auto;width:min(1000px,100vw);max-width:100vw;height:100dvh;max-height:100dvh;background:var(--off);overflow:auto;overscroll-behavior:contain}
+dialog.pdp[open]{animation:slide .45s cubic-bezier(.2,.7,.2,1)}
+.pdp-in{display:grid;grid-template-columns:1.15fr 1fr;min-height:100%}
+.pdp-gal{display:grid;gap:4px;align-content:start;background:var(--off)}
+.pdp-gal .shot{position:relative;aspect-ratio:4/5;max-width:100%;background:#fff;display:grid;place-items:center;overflow:hidden}
+.pdp-gal .shot img{width:100%;height:100%;object-fit:contain;padding:6%}
+.pdp-gal .shot.photo img{object-fit:cover;padding:0}
+.pdp-body{padding:calc(14px + env(safe-area-inset-top,0px)) var(--gut-r) 40px clamp(20px,3vw,40px);position:relative}
+.pdp-body > *{min-width:0}
+.pdp-top{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--off);padding:6px 0 10px;z-index:2}
+.pdp-body h2{font-size:clamp(2.6rem,6vw,4.6rem);margin-top:10px}
+.pdp-price{font-size:1.6rem;font-weight:800;margin-top:12px;font-variant-numeric:tabular-nums}
+.ship-note{font-size:13px;color:var(--muted);margin-top:2px}
+.pdp-desc{color:var(--muted);margin-top:18px}
+.sizes-h{display:flex;justify-content:space-between;align-items:baseline;margin-top:28px;margin-bottom:10px;gap:10px;flex-wrap:wrap}
+.sizes{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.sizes button{border:1px solid var(--black);background:transparent;padding:13px 0;font-weight:800;font-size:15px}
+.sizes button:hover{background:#fff}
+.sizes button[aria-pressed="true"]{background:var(--black);color:#fff}
+.add{width:100%;margin-top:16px;padding:18px}
+.guide{margin-top:26px;border-top:1px solid var(--line)}
+.guide summary{cursor:pointer;padding:14px 0;font-weight:800;list-style:none;display:flex;justify-content:space-between;text-transform:uppercase;letter-spacing:.06em;font-size:14px}
+.guide summary::-webkit-details-marker{display:none}
+.guide summary::after{content:"+"}
+.guide[open] summary::after{content:"–"}
+.guide table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:8px;font-variant-numeric:tabular-nums}
+.guide th,.guide td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+.guide th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.guide td{color:var(--grey)}
+.facts{border-top:1px solid var(--line)}
+.facts div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.facts span:first-child{color:var(--muted)}
+.facts span:last-child{text-align:right}
+@media (max-width:760px){
+  .pdp-in{grid-template-columns:1fr}
+  .pdp-gal{grid-auto-flow:column;grid-auto-columns:84%;overflow-x:auto;scroll-snap-type:x mandatory;order:2;padding-bottom:20px}
+  .pdp-gal .shot{scroll-snap-align:start}
+  .pdp-body{order:1;padding-bottom:16px}
+}
+
+dialog.drawer{margin:0 0 0 auto;width:min(460px,100vw);max-width:100vw;height:100dvh;max-height:100dvh;background:var(--off)}
+dialog.drawer[open]{animation:slide .4s cubic-bezier(.2,.7,.2,1)}
+.drawer-in{height:100%;display:flex;flex-direction:column;padding:calc(18px + env(safe-area-inset-top,0px)) var(--gut-r) calc(18px + env(safe-area-inset-bottom,0px)) 20px}
+.drawer-head{display:flex;justify-content:space-between;align-items:center}
+.drawer-head h2{font-size:2.6rem}
+/* Barra de envío gratis: un rayo que se carga */
+.charge{margin-top:16px;background:var(--black);color:#fff;padding:14px 16px 16px}
+.charge p{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.charge p b{font-variant-numeric:tabular-nums}
+.charge svg{width:100%;height:auto;margin-top:10px;overflow:visible}
+.charge .base{fill:#2A2C33}
+.charge .fill{transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.charge .glow{opacity:0;transition:opacity .3s}
+.charge.full .glow{opacity:1}
+.charge.full{animation:zap .5s 2}
+@keyframes zap{50%{background:#2b3a63}}
+.lines{list-style:none;margin:16px 0 0;padding:0;flex:1;overflow:auto;display:grid;align-content:start;gap:10px}
+.lines li{display:grid;grid-template-columns:76px 1fr auto;gap:12px;align-items:center;background:#fff;padding:8px}
+.lines img{width:76px;height:76px;object-fit:contain}
+.lines b{display:block;font-size:14px;font-weight:700}
+.lines small{color:var(--muted);font-size:12.5px}
+.qty{display:flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums;font-weight:700}
+.qty button{width:28px;height:28px;border:1px solid var(--black);background:transparent;line-height:1}
+.lines .empty{display:block;background:none;color:var(--muted);text-align:center;padding:28px 0}
+.drawer-foot{padding-top:14px;display:grid;gap:8px}
+.drawer-foot .row{display:flex;justify-content:space-between;font-size:15px}
+.drawer-foot .row b{font-variant-numeric:tabular-nums}
+.pay-apple{background:#000;color:#fff}
+.drawer-foot .btn:disabled{opacity:.35;cursor:not-allowed}
+.drawer-note{font-size:12.5px;color:var(--muted);text-align:center;margin-top:4px}
+
+dialog.promo{width:min(780px,calc(100vw - 32px));max-height:calc(100dvh - 32px);background:var(--black);color:#fff;overflow:auto}
+dialog.promo[open]{animation:pop .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes pop{from{transform:translateY(16px) scale(.98);opacity:0}}
+.promo-in{display:grid;grid-template-columns:1fr 1.15fr}
+.promo-img{position:relative;min-height:100%}
+.promo-img img{width:100%;height:100%;object-fit:cover}
+.promo-img svg{position:absolute;right:-28px;bottom:18%;width:120px;filter:drop-shadow(0 8px 20px rgba(0,0,0,.5))}
+.promo-body{padding:20px 22px 26px clamp(24px,3.4vw,38px);min-width:0}
+.promo-body .close{margin-left:auto;background:#fff;color:var(--black)}
+.promo-body .lbl{color:var(--volt)}
+.promo-body h2{font-size:clamp(3.2rem,8vw,5.6rem);margin:8px 0 12px}
+.promo-body h2 span{display:block;font-size:.42em;letter-spacing:.01em}
+.promo-body p{color:#A3A8B1}
+.promo-form{display:grid;gap:8px;margin-top:18px}
+.promo-form input{border:0;background:#fff;color:var(--black);padding:15px 16px;min-width:0}
+.promo-note{font-size:12.5px;margin-top:10px}
+.promo-body p.promo-note.ok{color:#fff;font-weight:700}
+.code{display:inline-block;background:var(--volt);color:#fff;padding:3px 8px;letter-spacing:.12em;font-weight:800}
+@media (max-width:620px){.promo-in{grid-template-columns:1fr}.promo-img{height:170px}.promo-img img{object-position:50% 30%}.promo-img svg{width:80px;right:16px;bottom:-24px}}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);opacity:0;z-index:90;background:var(--black);color:#fff;padding:13px 18px;font-size:14px;transition:.3s;pointer-events:none;max-width:calc(100vw - 32px);display:flex;gap:10px;align-items:center}
+.toast svg{width:16px;height:10px;fill:var(--volt);flex:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.review{position:fixed;right:var(--gut-r);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.review-btn{border:0;background:#fff;color:var(--black);padding:10px 14px;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);display:flex;gap:8px;align-items:center}
+.review-btn i{width:8px;height:8px;border-radius:50%;background:var(--volt)}
+.review-panel{width:min(360px,calc(100vw - 32px));max-height:min(70vh,560px);overflow:auto;background:#fff;box-shadow:0 20px 50px -16px rgba(0,0,0,.5);padding:18px}
+.review-panel h3{font-family:var(--f-display);font-size:1.2rem;font-weight:700;letter-spacing:-.02em}
+.review-panel p{font-size:13px;color:var(--muted);margin-top:4px}
+.review-panel ol{margin:14px 0 0;padding-left:20px;display:grid;gap:8px;font-size:14px}
+.review-panel ol small{display:block;color:var(--muted);font-size:12.5px}
+.review-panel label{display:flex;gap:8px;align-items:center;font-size:13px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.cursor{position:fixed;left:0;top:0;z-index:95;pointer-events:none;opacity:0}
+.cursor .cb{width:26px;height:16px;fill:var(--volt);transition:opacity .2s;filter:drop-shadow(0 0 2px rgba(255,255,255,.7))}
+.cursor .cv{position:absolute;left:50%;top:50%;width:78px;height:78px;margin:-39px 0 0 -39px;border-radius:50%;background:var(--black);color:#fff;display:grid;place-items:center;font-weight:900;font-size:12px;letter-spacing:.18em;text-transform:uppercase;transform:scale(0);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.cursor.on{opacity:1}
+.cursor.big .cv{transform:scale(1)}
+.cursor.big .cb{opacity:0}
+@media (hover:hover) and (pointer:fine){body.has-cursor .card,body.has-cursor .card *{cursor:none}}
+
+.rv{transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.pre{opacity:0;transform:translateY(26px)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .track,.stamp svg.ring{animation:none}
+  .rv.pre{opacity:1;transform:none}
+  .story-text .w{opacity:1;transition:none}
+  dialog[open]{animation:none!important}
+  .cursor{display:none}
+  .charge.full{animation:none}
+}
+</style>
+</head>
+<body class="clean">
+
+
+<!-- Símbolos: el rayo (el de la espalda de la Silver Strike) y la tela de cebra -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="bolt" viewBox="0 0 100 60"><path transform="translate(50 30) rotate(62) scale(2.25 5) translate(-12 -12)" d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4EEFF" stop-opacity=".9"/><stop offset=".55" stop-color="#A9C4F5" stop-opacity=".6"/><stop offset="1" stop-color="#7FA2E6" stop-opacity=".75"/></linearGradient>
+    <linearGradient id="voltg" x1="0" x2="1"><stop offset="0" stop-color="#3C5CA0"/><stop offset="1" stop-color="#7C9BE6"/></linearGradient>
+  </defs>
+</svg>
+
+<div class="grain" aria-hidden="true"></div>
+<a class="wm" href="https://www.instagram.com/markaestudio_" target="_blank" rel="noopener">Web diseñada por <b>MARKA</b></a>
+
+<nav class="nav lbl" id="nav" aria-label="Principal">
+  <a class="logo" href="#top" aria-label="Sliff Company, inicio"><svg><use href="#bolt"/></svg>Sliff</a>
+  <ul>
+    <li><a href="#coleccion">Colección</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#vida">Vida</a></li>
+    <li><a href="#drop">Próximo drop</a></li>
+  </ul>
+  <button class="bag lbl" id="bagBtn" type="button" aria-label="Abrir la bolsa"><svg><use href="#bolt"/></svg>Bolsa <span id="bagCount">0</span></button>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-photo"><img src="fotos/hero.jpg" alt="Chico con la Crown Volt Hoodie y la capucha puesta en un jardín" fetchpriority="high"></div>
+    <div class="stamp" aria-hidden="true">
+    <svg class="ring" viewBox="0 0 100 100"><defs><path id="circ" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0"/></defs><text><textPath href="#circ" textLength="236" lengthAdjust="spacing">SLIFF COMPANY · BUILT DIFFERENT ·</textPath></text></svg>
+    <div class="core"><svg viewBox="0 0 100 60"><use href="#bolt"/></svg></div>
+  </div>
+  <div class="hero-in wrap">
+    <h1 class="mark" id="mark">Sliff</h1>
+    <div class="hero-row">
+      <div>
+        <p class="claim">De aquí a lo grande,<span class="script">pero juntos.</span></p>
+        <div class="hero-meta lbl"><span><svg><use href="#bolt"/></svg>Preventa abierta</span><span><svg><use href="#bolt"/></svg>Envío gratis desde 80 €</span></div>
+      </div>
+      <a class="btn btn-light" href="#coleccion">Ver colección <svg><use href="#bolt"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<main class="over">
+  <div class="studs" aria-hidden="true"></div>
+
+  <section id="coleccion">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow lbl"><svg><use href="#bolt"/></svg>Colección 01</span>
+          <h2 class="big">Built<br><em>different.</em></h2>
+        </div>
+        <p>Dos sudaderas vintage con tachuelas y rayo. Estamos en preventa, así que tienes todas las tallas. Pasa por encima para verlas por detrás.</p>
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="flip-hint">En el móvil: mantén pulsada una sudadera para darle la vuelta.</p>
+    </div>
+  </section>
+
+  <div class="marquee" aria-label="One family. One vision. One journey. Built different.">
+    <div class="track" aria-hidden="true" id="track"></div>
+  </div>
+
+  <section class="story" id="historia">
+    <svg class="story-bolt" id="storyBolt" viewBox="0 0 100 60" aria-hidden="true"><path transform="translate(50 30) rotate(62) scale(2.25 5) translate(-12 -12)" d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" fill="url(#glass)" stroke="#fff" stroke-opacity=".7" stroke-width=".6"/></svg>
+    <div class="wrap">
+      <span class="eyebrow lbl"><svg><use href="#bolt"/></svg>Nuestra historia</span>
+      <p class="story-text" id="story" data-keys="pequeñas,ideas,creer">Las grandes cosas empiezan con pequeñas ideas, pero solo crecen cuando hay personas dispuestas a creer en ellas.</p>
+      <div class="story-foot">
+        <div class="rv"><div class="studs"></div><b>Unión</b><span>Una familia construida a través de la confianza y la ilusión.</span></div>
+        <div class="rv"><div class="studs"></div><b>Creatividad</b><span>Cada uno aporta su personalidad y su manera de ver el mundo.</span></div>
+        <div class="rv"><div class="studs"></div><b>Confianza</b><span>En las personas que forman parte del proyecto.</span></div>
+        <div class="rv"><div class="studs"></div><b>Fe</b><span>En nuestras ideas y en todo lo que todavía está por venir.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nosotros">
+    <div class="wrap about-grid">
+      <div class="about-photo todo" role="img" aria-label="Foto del equipo (pendiente)">
+        <span class="todo-tag"><b>Pendiente</b> · Foto del equipo, todos juntos</span>
+      </div>
+      <div class="about-text">
+        <span class="eyebrow lbl"><svg><use href="#bolt"/></svg>Quiénes somos</span>
+        <h2 class="big">Una idea. Una familia. Un mismo sueño.</h2>
+        <p>Sliff Company nace de algo más grande que la idea de crear una marca de ropa. Nace de la unión de personas que comparten mucho más que una amistad: una familia construida a través de la confianza, la ilusión y las ganas de crear algo juntos.</p>
+        <p>Lo que comenzó como una idea entre amigos y familiares, personas unidas por una misma visión, fue tomando forma hasta convertirse en un proyecto en el que cada uno aporta su creatividad, personalidad y manera de entender el mundo.</p>
+        <p>Nuestra historia comienza con las ganas de emprender, imaginar y dar vida a proyectos propios. Con conversaciones, ideas que se convierten en diseños y la ilusión de construir algo que algún día pudiera llegar mucho más lejos.</p>
+        <details class="more">
+          <summary class="lbl">Seguir leyendo <svg><use href="#bolt"/></svg></summary>
+          <p>No queríamos crear únicamente ropa. Queríamos construir una identidad, una comunidad y algo que representase quiénes somos.</p>
+          <p>Cada paso ha sido una oportunidad para aprender, mejorar y acercarnos un poco más a aquello que imaginamos desde el principio.</p>
+          <p>Sliff Company representa la unión, la creatividad, la confianza y, sobre todo, la fe. Fe en nuestras ideas, en las personas que forman parte del proyecto y en todo lo que todavía está por venir.</p>
+          <p>Somos un proyecto familiar, nacido de personas que creen en el poder de trabajar juntas y de convertir los sueños compartidos en realidades. Porque para nosotros, el verdadero valor de este proyecto no está solamente en lo que creamos, sino también en quiénes lo hacemos posible.</p>
+          <p>Sliff Company sigue creciendo, evolucionando y descubriendo nuevos caminos. Lo que ayer era una idea hoy es una realidad que seguimos construyendo con la misma ilusión del primer día.</p>
+          <p>Cada diseño, cada colección y cada nuevo paso forman parte de una historia que todavía se está escribiendo. No sabemos hasta dónde nos llevará este camino, pero sí tenemos claro de dónde venimos y qué nos ha unido desde el principio.</p>
+        </details>
+        <p class="sign">One family. One vision. One journey.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="vida" id="vida">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow lbl"><svg><use href="#bolt"/></svg>Vida</span>
+          <h2 class="big">Gente real,<br>sin pose.</h2>
+        </div>
+        <p>Así se lleva Sliff en el día a día. Etiquétanos en Instagram o TikTok para salir aquí.</p>
+      </div>
+      <div class="collage">
+        <figure class="ph rv c1"><img src="fotos/life-cv-girl.jpg" alt="Chica con la Crown Volt Hoodie poniéndose la capucha" loading="lazy"><span class="tagline lbl">Crown Volt</span></figure>
+        <figure class="ph rv c2"><img src="fotos/cv-detail.jpg" alt="Detalle del rayo de cebra y las tachuelas de la capucha" loading="lazy"></figure>
+        <figure class="ph rv c3"><img src="fotos/life-ss-back.jpg" alt="Chico de espaldas con la Silver Strike Hoodie frente a una buganvilla" loading="lazy"><span class="tagline lbl">Silver Strike</span></figure>
+        <figure class="ph rv c4"><img src="fotos/life-ss-girl.jpg" alt="Chica con la Silver Strike Hoodie bajo un árbol" loading="lazy"></figure>
+        <figure class="ph rv c5"><img src="fotos/life-door.jpg" alt="Chico con la Crown Volt Hoodie de noche junto a una puerta verde" loading="lazy"></figure>
+      </div>
+      <div class="follow lbl">
+        <a href="https://www.instagram.com/sliffcompany" target="_blank" rel="noopener">Instagram <b>@sliffcompany</b></a>
+        <a href="https://www.tiktok.com/@sliffcompany" target="_blank" rel="noopener">TikTok <b>@sliffcompany</b></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="drop" id="drop">
+    <div class="wrap drop-grid">
+      <div>
+        <span class="eyebrow lbl" style="color:#fff"><svg><use href="#bolt"/></svg>Próximo drop</span>
+        <h2 class="big">Lo siguiente<span class="script">llega pronto.</span></h2>
+        <p>Apúntate y te avisamos antes que a nadie. Unidades limitadas en cada drop.</p>
+      </div>
+      <div>
+        <div class="drop-date">
+          <span><b class="todo-text">— —</b>Fecha por confirmar</span>
+          <span><b>15%</b>En tu primera compra</span>
+        </div>
+        <form class="form" id="wait" novalidate>
+          <label class="sr" for="email">Tu email</label>
+          <input id="email" type="email" placeholder="Tu email" autocomplete="email">
+          <button class="btn btn-dark" type="submit">Avísame <svg><use href="#bolt"/></svg></button>
+        </form>
+        <p class="form-note" id="formNote">Sin spam. Solo drops.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p class="foot-sign" aria-label="Sliff Company. Built different.">Sliff Company<small>Built different</small></p>
+      <div class="studs" aria-hidden="true" style="opacity:.6"></div>
+      <div class="foot">
+        <div>
+          <h4 class="lbl">Contacto</h4>
+          <p class="contact"><span id="mailTxt">sliffcompany@gmail.com</span> <button type="button" class="copy lbl" id="copyMail">Copiar</button></p>
+          <div class="pays lbl" aria-label="Métodos de pago"><span>Apple Pay</span><span>Tarjeta</span><span>Envíos a España</span></div>
+        </div>
+        <div>
+          <h4 class="lbl">Redes</h4>
+          <ul>
+            <li><a href="https://www.instagram.com/sliffcompany" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/@sliffcompany" target="_blank" rel="noopener">TikTok</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="lbl">Ayuda</h4>
+          <ul>
+            <li><a href="#">Envío gratis desde 80 €</a></li>
+            <li><a href="#" class="todo-text">Cambios y devoluciones</a></li>
+            <li><a href="#" class="todo-text">Guía de tallas</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="lbl">Legal</h4>
+          <ul>
+            <li><a href="#" class="todo-text">Aviso legal</a></li>
+            <li><a href="#" class="todo-text">Privacidad</a></li>
+            <li><a href="#" class="todo-text">Cookies</a></li>
+            <li><a href="#" class="todo-text">Condiciones de compra</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="legal lbl">
+        <span>© 2026 Sliff Company</span>
+        <a class="made" href="https://www.instagram.com/markaestudio_" target="_blank" rel="noopener" aria-label="Web diseñada por Marka (Instagram)"><i>Web por</i><b>MARKA</b></a>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<dialog class="pdp" id="pdp" aria-labelledby="pdpName">
+  <div class="pdp-in">
+    <div class="pdp-gal" id="pdpGal"></div>
+    <div class="pdp-body">
+      <div class="pdp-top"><span class="lbl" style="color:var(--blue)" id="pdpTag">Colección 01</span><button class="close" id="pdpClose" type="button" aria-label="Cerrar">✕</button></div>
+      <h2 class="big" id="pdpName">Sudadera</h2>
+      <p class="pdp-price" id="pdpPrice">—</p>
+      <p class="ship-note">IVA incluido · Envío gratis en España desde 80 €</p>
+      <p class="pdp-desc" id="pdpDesc"></p>
+      <div class="sizes-h"><b class="lbl">Talla</b><span class="lbl" style="color:var(--blue)">Preventa · todas disponibles</span></div>
+      <div class="sizes" id="sizes" role="group" aria-label="Talla"></div>
+      <button class="btn btn-dark add" id="addBtn" type="button">Elige una talla</button>
+      <details class="guide">
+        <summary>Guía de tallas</summary>
+        <table>
+          <thead><tr><th>Talla</th><th>Pecho</th><th>Largo</th><th>Manga</th></tr></thead>
+          <tbody>
+            <tr><td>XS</td><td>— cm</td><td>— cm</td><td>— cm</td></tr>
+            <tr><td>S</td><td>— cm</td><td>— cm</td><td>— cm</td></tr>
+            <tr><td>M</td><td>— cm</td><td>— cm</td><td>— cm</td></tr>
+            <tr><td>L</td><td>— cm</td><td>— cm</td><td>— cm</td></tr>
+            <tr><td>XL</td><td>— cm</td><td>— cm</td><td>— cm</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:14px" class="todo-text">Medidas pendientes. Corte oversize: indicar si se recomienda pedir una talla menos.</p>
+      </details>
+      <div class="facts">
+        <div><span>Composición</span><span class="todo-text">Pendiente</span></div>
+        <div><span>Cuidados</span><span class="todo-text">Pendiente</span></div>
+        <div><span>Envío</span><span>Solo España · gratis desde 80 €</span></div>
+        <div><span>Preventa</span><span class="todo-text">Fecha de envío por confirmar</span></div>
+        <div><span>Pago</span><span>Apple Pay o tarjeta</span></div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="drawer" id="bag" aria-labelledby="bagTitle">
+  <div class="drawer-in">
+    <div class="drawer-head"><h2 class="big" id="bagTitle">Tu bolsa</h2><button class="close" id="bagClose" type="button" aria-label="Cerrar">✕</button></div>
+    <div class="charge" id="charge">
+      <p><span id="shipMsg">Envío gratis desde 80 €</span><b id="shipPct">0%</b></p>
+      <svg viewBox="0 0 300 40" role="img" aria-label="Progreso hacia el envío gratis">
+        <defs><clipPath id="boltClip"><path transform="translate(150 20) rotate(83) scale(2.1 14.5) translate(-12 -12)" d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></clipPath></defs>
+        <path class="base" transform="translate(150 20) rotate(83) scale(2.1 14.5) translate(-12 -12)" d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+        <g clip-path="url(#boltClip)"><rect class="fill" id="shipFill" x="0" y="0" width="0" height="40" fill="url(#voltg)"/></g>
+        <path class="glow" transform="translate(150 20) rotate(83) scale(2.1 14.5) translate(-12 -12)" d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" fill="none" stroke="#fff" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <ul class="lines" id="lines"></ul>
+    <div class="drawer-foot">
+      <div class="row"><span>Subtotal (IVA incl.)</span><b id="sub">0,00 €</b></div>
+      <div class="row"><span>Envío a España</span><span id="shipCost">—</span></div>
+      <button class="btn pay-apple" type="button" data-pay="Apple Pay">Pagar con Apple Pay</button>
+      <button class="btn btn-blue" type="button" data-pay="tarjeta">Pagar con tarjeta</button>
+      <p class="drawer-note">Pago seguro con Stripe. Solo enviamos a España.</p>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="promo" id="promo" aria-labelledby="promoTitle">
+  <div class="promo-in">
+    <div class="promo-img"><img src="fotos/life-ss-front.jpg" alt="" loading="lazy"><svg viewBox="0 0 100 60" aria-hidden="true"><path transform="translate(50 30) rotate(62) scale(2.25 5) translate(-12 -12)" d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" fill="url(#glass)" stroke="#fff" stroke-opacity=".7" stroke-width=".6"/></svg></div>
+    <div class="promo-body">
+      <button class="close" id="promoClose" type="button" aria-label="Cerrar">✕</button>
+      <span class="lbl">Únete a la familia</span>
+      <h2 class="big" id="promoTitle">-15%<span>en tu primera compra</span></h2>
+      <p>Déjanos tu email y te mandamos el código para tu primer pedido.</p>
+      <form class="promo-form" id="promoForm" novalidate>
+        <label for="promoEmail" class="sr">Tu email</label>
+        <input id="promoEmail" type="email" placeholder="Tu email" autocomplete="email">
+        <button class="btn btn-blue" type="submit">Quiero mi 15% <svg><use href="#bolt"/></svg></button>
+      </form>
+      <p class="promo-note" id="promoNote">Sin spam. Puedes darte de baja cuando quieras.</p>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><svg><use href="#bolt"/></svg><span id="toastTxt"></span></div>
+<div class="cursor" id="cursor" aria-hidden="true"><svg class="cb" viewBox="0 0 100 60"><use href="#bolt"/></svg><span class="cv">Ver</span></div>
+
+
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var BOLT='<svg viewBox="0 0 100 60"><use href="#bolt"/></svg>';
+  var ZBOLT='<svg class="z" viewBox="0 0 100 60"><path transform="translate(50 30) rotate(62) scale(2.25 5) translate(-12 -12)" d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>';
+
+  /* Manifiesto */
+  var seg='<span>One family</span>'+BOLT+'<span class="s">one vision</span>'+ZBOLT+'<span>One journey</span>'+BOLT+'<span class="s">built different</span>'+ZBOLT;
+  document.getElementById('track').innerHTML=seg+seg;
+
+  /* ---------- Productos ---------- */
+  var PRODUCTS=[
+    {id:'crown-volt', name:'Crown Volt Hoodie', color:'Berenjena', price:54.90,
+     desc:'Sudadera en tono berenjena con estética vintage, detalles de tachuelas y un rayo en la capucha con tela de cebra que combina con tono rosa pastel. Delante, un bordado encima del bolsillo en tono amarillo pastel.',
+     front:'fotos/cv-front.jpg', back:'fotos/cv-back.jpg', shots:['fotos/cv-detail.jpg','fotos/life-cv-girl.jpg','fotos/life-cv-back.jpg']},
+    {id:'silver-strike', name:'Silver Strike Hoodie', color:'Negro', price:54.90,
+     desc:'Sudadera negra de estética vintage y acabado desgastado, combinada con detalles de tachuelas, un gran rayo en la espalda con textura en color rosa maquillaje y, delante en el centro del pecho, un bordado en rosa pastel.',
+     front:'fotos/ss-front.jpg', back:'fotos/ss-back.jpg', shots:['fotos/life-ss-girl.jpg','fotos/life-ss-back.jpg','fotos/life-ss-sit.jpg']}
+  ];
+  var SIZES=['XS','S','M','L','XL'], FREE_SHIP=80;
+  function eur(n){ return n.toFixed(2).replace('.',',')+' €' }
+
+  var grid=document.getElementById('grid');
+  PRODUCTS.forEach(function(p){
+    var el=document.createElement('button'); el.type='button'; el.className='card rv';
+    el.setAttribute('aria-label',p.name+', '+p.color+', '+eur(p.price)+'. Ver ficha');
+    el.innerHTML='<div class="card-img">'+
+      '<svg class="bolt-bg" viewBox="0 0 100 60" aria-hidden="true"><path transform="translate(50 30) rotate(62) scale(2.25 5) translate(-12 -12)" d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" fill="url(#glass)" stroke="#fff" stroke-opacity=".7" stroke-width=".6"/></svg>'+
+      '<span class="badge lbl">'+BOLT+'Preventa</span>'+
+      '<div class="face front"><img src="'+p.front+'" alt="'+p.name+' por delante"></div>'+
+      '<div class="face back"><img src="'+p.back+'" alt="'+p.name+' por detrás"><span class="side-label lbl">Detrás</span></div></div>'+
+      '<div class="card-info"><h3>'+p.name+'</h3><span class="price">'+eur(p.price)+'</span><small>'+p.color+' · Todas las tallas · IVA incl.</small></div>';
+    el.addEventListener('click',function(){ openPdp(p) });
+    var t;
+    el.addEventListener('touchstart',function(){ t=setTimeout(function(){el.classList.add('flipped')},280) },{passive:true});
+    el.addEventListener('touchend',function(){ clearTimeout(t); setTimeout(function(){el.classList.remove('flipped')},900) });
+    grid.appendChild(el);
+  });
+
+  /* ---------- Ficha ---------- */
+  var pdp=document.getElementById('pdp'), sizesEl=document.getElementById('sizes'), addBtn=document.getElementById('addBtn'), chosen=null, current=null;
+  function openPdp(p){
+    current=p; chosen=null;
+    document.getElementById('pdpName').textContent=p.name;
+    document.getElementById('pdpTag').textContent='Colección 01 · '+p.color;
+    document.getElementById('pdpPrice').textContent=eur(p.price);
+    document.getElementById('pdpDesc').textContent=p.desc;
+    var g='<div class="shot"><img src="'+p.front+'" alt="'+p.name+' por delante"></div><div class="shot"><img src="'+p.back+'" alt="'+p.name+' por detrás"></div>';
+    p.shots.forEach(function(s){ g+='<div class="shot photo"><img src="'+s+'" alt="'+p.name+' puesta" loading="lazy"></div>' });
+    document.getElementById('pdpGal').innerHTML=g;
+    sizesEl.innerHTML='';
+    SIZES.forEach(function(s){
+      var b=document.createElement('button'); b.type='button'; b.textContent=s; b.setAttribute('aria-pressed','false');
+      b.onclick=function(){ sizesEl.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false')}); b.setAttribute('aria-pressed','true'); chosen=s; addBtn.innerHTML='Añadir a la bolsa · '+s+' '+BOLT };
+      sizesEl.appendChild(b);
+    });
+    addBtn.textContent='Elige una talla';
+    if(pdp.showModal) pdp.showModal(); else pdp.setAttribute('open','');
+    pdp.scrollTop=0;
+  }
+  document.getElementById('pdpClose').onclick=function(){ pdp.close() };
+  pdp.addEventListener('click',function(e){ if(e.target===pdp) pdp.close() });
+
+  /* ---------- Bolsa + rayo de envío gratis ---------- */
+  var cart=[], bagD=document.getElementById('bag'), charge=document.getElementById('charge'), wasFull=false;
+  addBtn.onclick=function(){
+    if(!chosen){ toast('Elige una talla primero'); return; }
+    var k=current.id+'-'+chosen, line=cart.filter(function(l){return l.k===k})[0];
+    if(line) line.q++; else cart.push({k:k,p:current,s:chosen,q:1});
+    pdp.close(); openBag(); setTimeout(drawBag,80);
+  };
+  function drawBag(){
+    var n=0,sub=0,ul=document.getElementById('lines');
+    ul.innerHTML='';
+    cart.forEach(function(l,i){
+      n+=l.q; sub+=l.q*l.p.price;
+      var li=document.createElement('li');
+      li.innerHTML='<img src="'+l.p.front+'" alt=""><div><b>'+l.p.name+'</b><small>Talla '+l.s+' · '+eur(l.p.price)+'</small></div><div class="qty"><button type="button" aria-label="Quitar una">−</button>'+l.q+'<button type="button" aria-label="Añadir una">+</button></div>';
+      var bs=li.querySelectorAll('button');
+      bs[0].onclick=function(){ l.q--; if(!l.q) cart.splice(i,1); drawBag() };
+      bs[1].onclick=function(){ l.q++; drawBag() };
+      ul.appendChild(li);
+    });
+    if(!cart.length) ul.innerHTML='<li class="empty">Tu bolsa está vacía. Echa un vistazo a la colección.</li>';
+    document.getElementById('bagCount').textContent=n;
+    document.getElementById('sub').textContent=eur(sub);
+    var left=Math.max(0,FREE_SHIP-sub), pct=Math.min(100,Math.round(sub/FREE_SHIP*100));
+    document.getElementById('shipMsg').textContent= !sub ? 'Carga el rayo: envío gratis desde 80 €' : left>0 ? 'Te faltan '+eur(left)+' para el envío gratis' : '¡Rayo cargado! Envío gratis';
+    document.getElementById('shipPct').textContent=pct+'%';
+    document.getElementById('shipFill').setAttribute('width',pct*3);
+    document.getElementById('shipCost').textContent= !sub ? '—' : left>0 ? 'Se calcula al pagar' : 'Gratis';
+    var full=left===0&&sub>0; charge.classList.toggle('full',full);
+    if(full&&!wasFull) toast('Rayo cargado: tu envío es gratis');
+    wasFull=full;
+    bagD.querySelectorAll('[data-pay]').forEach(function(b){ b.disabled=!cart.length });
+  }
+  function openBag(){ if(bagD.showModal) bagD.showModal(); else bagD.setAttribute('open','') }
+  document.getElementById('bagBtn').onclick=function(){ openBag(); drawBag() };
+  document.getElementById('bagClose').onclick=function(){ bagD.close() };
+  bagD.addEventListener('click',function(e){ if(e.target===bagD) bagD.close() });
+  bagD.querySelectorAll('[data-pay]').forEach(function(b){ b.onclick=function(){ toast('El pago con '+b.dataset.pay+' se activa al conectar Stripe') } });
+  drawBag();
+
+  /* ---------- Toast ---------- */
+  var tEl=document.getElementById('toast'), tTx=document.getElementById('toastTxt'), tT;
+  function toast(m){ tTx.textContent=m; tEl.classList.add('on'); clearTimeout(tT); tT=setTimeout(function(){tEl.classList.remove('on')},2800) }
+
+  /* ---------- Formularios ---------- */
+  var EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  document.getElementById('wait').addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=document.getElementById('email').value.trim(), n=document.getElementById('formNote');
+    if(!EMAIL.test(v)){ n.className='form-note'; n.textContent='Revisa el email, parece que falta algo.'; return; }
+    n.className='form-note ok'; n.textContent='¡Dentro! Te avisamos del próximo drop. (Demo: todavía no se guarda en ninguna lista.)';
+    this.reset();
+  });
+  document.getElementById('copyMail').onclick=function(){
+    var t=document.getElementById('mailTxt').textContent;
+    function sel(){ var r=document.createRange(); r.selectNodeContents(document.getElementById('mailTxt')); var s=getSelection(); s.removeAllRanges(); s.addRange(r); toast('Email seleccionado: cópialo con Ctrl+C') }
+    try{ navigator.clipboard.writeText(t).then(function(){toast('Email copiado')},sel) }catch(e){ sel() }
+  };
+
+  /* ---------- Pop-up 15% ---------- */
+  var promo=document.getElementById('promo'), seen=false;
+  try{ seen=localStorage.getItem('sliff-promo')==='1' }catch(e){}
+  function remember(){ try{ localStorage.setItem('sliff-promo','1') }catch(e){} }
+  function showPromo(){ if(seen||promo.open||pdp.open||bagD.open) return; seen=true; if(promo.showModal) promo.showModal() }
+  if(!seen){
+    setTimeout(showPromo,14000);
+    addEventListener('scroll',function sp(){ if(scrollY>innerHeight*2.6){ showPromo(); removeEventListener('scroll',sp) } },{passive:true});
+  }
+  document.getElementById('promoClose').onclick=function(){ remember(); promo.close() };
+  promo.addEventListener('click',function(e){ if(e.target===promo){ remember(); promo.close() } });
+  document.getElementById('promoForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=document.getElementById('promoEmail').value.trim(), n=document.getElementById('promoNote');
+    if(!EMAIL.test(v)){ n.className='promo-note'; n.textContent='Revisa el email, parece que falta algo.'; return; }
+    remember(); this.hidden=true;
+    n.className='promo-note ok'; n.innerHTML='¡Ya eres de la familia! Tu código: <span class="code">SLIFF15</span>';
+  });
+
+  /* ---------- Reveal (solo lo que aún está por debajo de la pantalla) ---------- */
+  var io='IntersectionObserver' in window && !reduce ? new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target) } }) },{rootMargin:'0px 0px -8% 0px'}) : null;
+  if(io) document.querySelectorAll('.rv').forEach(function(el){ if(el.getBoundingClientRect().top>innerHeight){ el.classList.add('pre'); io.observe(el) } });
+
+  /* ---------- Storytelling ---------- */
+  var story=document.getElementById('story'), keys=story.dataset.keys.split(',');
+  story.innerHTML=story.textContent.trim().split(/\s+/).map(function(w){ return '<span class="w'+(keys.indexOf(w.toLowerCase().replace(/[.,]/g,''))>-1?' key':'')+'">'+w+'</span>' }).join(' ');
+  var words=story.querySelectorAll('.w'), sBolt=document.getElementById('storyBolt');
+
+  /* ---------- Scroll: el nombre se estira y el rayo sale disparado ---------- */
+  var mark=document.getElementById('mark'), nav=document.getElementById('nav'), ticking=false;
+  function onScroll(){
+    var h=innerHeight, y=scrollY;
+    if(!reduce){
+      var p=Math.min(1,Math.max(0,y/(h*.8)));
+      var r=story.getBoundingClientRect();
+      var sp=Math.min(1,Math.max(0,(h*.85-r.top)/(r.height+h*.35)));
+      var lit=Math.round(sp*words.length*1.05);
+      for(var i=0;i<words.length;i++) words[i].classList.toggle('lit',i<lit);
+      sBolt.style.transform='translateY('+(sp*80-40)+'px) rotate('+(-10+sp*12)+'deg)';
+    }
+    nav.classList.toggle('solid',y>h*.75);
+    ticking=false;
+  }
+  addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(onScroll) } },{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();
+
+
+  /* ---------- Cursor rayo ---------- */
+  var cur=document.getElementById('cursor'), fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(fine&&!reduce){
+    document.body.classList.add('has-cursor');
+    var cx=-100,cy=-100,tx=-100,ty=-100,ang=-12,cb=cur.querySelector('.cb');
+    addEventListener('pointermove',function(e){ tx=e.clientX; ty=e.clientY; cur.classList.add('on') },{passive:true});
+    document.addEventListener('pointerleave',function(){ cur.classList.remove('on') });
+    (function loop(){ var dx=tx-cx, dy=ty-cy; cx+=dx*.3; cy+=dy*.3; ang+=((Math.max(-30,Math.min(30,dx*1.4))-12)-ang)*.15; cur.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)'; cb.style.transform='rotate('+ang.toFixed(1)+'deg)'; requestAnimationFrame(loop) })();
+    grid.querySelectorAll('.card').forEach(function(c){
+      c.addEventListener('pointerenter',function(){ cur.classList.add('big') });
+      c.addEventListener('pointerleave',function(){ cur.classList.remove('big') });
+    });
+  }
+
+})();
+</script>
+
+</body>
+</html>
